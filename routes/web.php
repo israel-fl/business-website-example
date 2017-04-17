@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+Route::get('/login', 'LoginController@login');
+Route::post('/login', 'LoginController@login');
+Route::get('/console', 'DashboardController@showDashboard')->middleware('auth');

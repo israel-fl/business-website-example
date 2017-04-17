@@ -1,0 +1,16 @@
+{
+  "name": "datarhino",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "dropzone": "4.3.0",
+    "fontawesome": "4.7.0",
+    "jquery": "3.2.1",
+    "jquery-ui": "1.12.1",
+    "moment": "2.18.1",
+    "mui": "0.9.13",
+    "adminlte": "2.4.0-alpha",
+    "material-dashboard": "https://github.com/creativetimofficial/material-dashboard.git"
+  },
+  "private": true
+}
