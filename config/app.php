@@ -179,6 +179,8 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+         Mailchimp\MailchimpServiceProvider::class,
+
     ],
 
     /*
@@ -229,7 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-
     ],
 
 ];

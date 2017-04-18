@@ -17,13 +17,11 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form class="mui-form" method="post" action="/login">
+    <h3 class="login-box-msg">Login</h3>
+      <form class="mui-form" method="post" action="/login" id="login">
       {{ csrf_field() }}
-  <legend>Login</legend>
   <div class="mui-textfield">
-    <input type="username" placeholder="Username" name="username" id="username">
+    <input type="email" placeholder="Email" name="email" id="email">
   </div>
   <div class="mui-textfield">
     <input type="password" placeholder="Password" name="pass" id="pass">
@@ -43,6 +41,7 @@
 <div class="row text-center">
       <a href="#">I forgot my password</a><br>
 </div>
+<ul id="messages" class="error-category"></ul>
 <div class="row">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -60,9 +59,10 @@
 
   </div>
   <!-- /.login-box -->
-  @section('scripts')
-  @parent
-
-  @endsection
   </body>
+@endsection
+
+@section('scripts')
+@parent
+{{ HTML::script('js/login.js') }}
 @endsection

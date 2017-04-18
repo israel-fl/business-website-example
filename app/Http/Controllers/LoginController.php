@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use App\User;
 use Redirect;
@@ -13,25 +14,26 @@ class LoginController extends Controller
     public function login(Request $request) {
         // determine whether to serve the view or post the login form
         if ($request->isMethod('post')) {
+
             $this->validate($request, [
                 'email' => 'bail|required',  // bail = don't continue validation if missing
                 'pass' => 'required'
             ]);
 
-            $username = $request('email');
+            $username = $request->input('email');
 
             $loginWasSuccessful = Auth::attempt([
                 'email' => request('email'),
-                'password' => Hash::make($request_>input('pass')) // we're comparing hashes
+                'password' => request('pass') // we're comparing hashes
             ]);
 
-            $password = Hash::make($request_>input('pass'));  // we're comparing hashes
+            dd($loginWasSuccessful);
 
             if ($loginWasSuccessful) {
                 return redirect('/console');
             } else {
                 // doesn't exist
-                return view('login')
+                return redirect('/login')
                     ->withInput()
                     ->withErrors("Email or password invalid");
             }
