@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Login')
+@section('title', 'Dashboard')
 
 @section('styles')
   @parent
@@ -22,8 +22,8 @@
             -->
 
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="/console" class="simple-text">
+                    {{ $user->name }}
                 </a>
             </div>
 
@@ -48,33 +48,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="typography.html">
-                            <i class="material-icons">library_books</i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="icons.html">
-                            <i class="material-icons">bubble_chart</i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="maps.html">
-                            <i class="material-icons">location_on</i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
                         <a href="notifications.html">
                             <i class="material-icons text-gray">notifications</i>
                             <p>Notifications</p>
-                        </a>
-                    </li>
-                    <li class="active-pro">
-                        <a href="upgrade.html">
-                            <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
                         </a>
                     </li>
                 </ul>
@@ -91,7 +67,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Material Dashboard</a>
+                        <a class="navbar-brand" href="#"><b>Data</b>Rhino | Dashboard</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -582,4 +558,4 @@
     <!-- Material Dashboard javascript methods -->
     {{ HTML::script('bower_components/material-dashboard/assets/js/material-dashboard.js') }}
 
-    @endsection
+@endsection

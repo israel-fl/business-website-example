@@ -19,6 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('level');
+            // Using string over bool for the verify column was more of a style choice
+            // since it seems there exists confusion about booleans in mysql
+            $table->string('verified');
             $table->rememberToken();
             $table->timestamps();
         });

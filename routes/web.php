@@ -18,8 +18,8 @@ Route::get('/login', 'LoginController@login');
 Route::post('/login', 'LoginController@login');
 Route::get('/register', 'RegisterController@register');
 Route::post('/register', 'RegisterController@register');
-Route::get('/console', 'DashboardController@showDashboard')->middleware('auth');
-Route::get('/verify', 'DashboardController@verify')->middleware('auth');
+Route::get('/verify', 'RegisterController@verify');
+Route::get('/dashboard', 'DashboardController@showDashboard');
 Route::get('/user', function() {
     dd(Auth::user());
 });

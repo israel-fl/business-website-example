@@ -9,7 +9,10 @@ use App\User;
 class DashboardController extends Controller
 {
     public function showDashboard() {
-
-        return view('dashboard');
+        // get user here and and send it over
+        $user = Auth::user();
+        return view('dashboard', [
+                'user' => $user,
+            ]);
     }
 }
