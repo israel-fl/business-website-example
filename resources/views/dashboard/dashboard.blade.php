@@ -22,7 +22,7 @@
             -->
 
             <div class="logo">
-                <a href="/console" class="simple-text">
+                <a href="/dashboard" class="simple-text">
                     {{ $user->name }}
                 </a>
             </div>
@@ -36,21 +36,35 @@
                         </a>
                     </li>
                     <li>
-                        <a href="user.html">
+                        <a href="/dashboard/profile">
                             <i class="material-icons">person</i>
                             <p>User Profile</p>
                         </a>
                     </li>
                     <li>
-                        <a href="table.html">
+                        <a href="/dashboard/tables">
                             <i class="material-icons">content_paste</i>
                             <p>Table List</p>
                         </a>
                     </li>
                     <li>
-                        <a href="notifications.html">
+                        <a href="/dashboard/notifications">
                             <i class="material-icons text-gray">notifications</i>
                             <p>Notifications</p>
+                        </a>
+                    </li>
+                    @if($user->level == 2)
+                    <li>
+                        <a href="/dashboard/create">
+                            <i class="material-icons text-gray">group_add</i>
+                            <p>Create Users</p>
+                        </a>
+                    </li>
+                    @endif
+                    <li>
+                        <a href="/logout">
+                            <i class="material-icons text-gray">power_settings_new</i>
+                            <p>Logout</p>
                         </a>
                     </li>
                 </ul>
@@ -112,6 +126,7 @@
                 </div>
             </nav>
 
+            @section('content')
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -504,6 +519,7 @@
                     </div>
                 </div>
             </div>
+            @show
 
             @section('footer')
             <footer class="footer">

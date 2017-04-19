@@ -9,8 +9,7 @@ use App\User;
 use Redirect;
 use Auth;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     public function login(Request $request) {
         // determine whether to serve the view or post the login form
         if ($request->isMethod('post')) {
@@ -27,10 +26,13 @@ class LoginController extends Controller
                 'password' => request('pass') // we're comparing hashes
             ]);
 
-            dd($loginWasSuccessful);
-
             if ($loginWasSuccessful) {
-                return redirect('/console');
+                $user = Auth::user();
+                if ($user->verified === "true") {
+                    return redirect('/dashboard');
+                } else {
+                    return redirect('/verify');
+                }
             } else {
                 // doesn't exist
                 return redirect('/login')

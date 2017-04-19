@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('level');
             // Using string over bool for the verify column was more of a style choice
             // since it seems there exists confusion about booleans in mysql
-            $table->string('verified');
+            $table->string('verified')->default("false");
             $table->rememberToken();
             $table->timestamps();
         });

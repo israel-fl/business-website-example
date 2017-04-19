@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use App\User;
+use App\VerifyEmailRequest;
+use Carbon\Carbon;
 use Redirect;
 use Auth;
 use Illuminate\Database\QueryException;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -36,8 +39,18 @@ class RegisterController extends Controller
                     $user->password =  Hash::make($pass);  // we're storing hashes of the passwords
                     $user->level = 1;  // every new user is level 1, admins are assigned in registerAdmin
                     $user->save();
-                    $token = sendEmail($user); // return the redirect request
-                    return redirect()->route('verify', [$user, $token]);
+
+                    $loginWasSuccessful = Auth::attempt([
+                        'email' => $email,
+                        'password' => $pass // we're comparing hashes
+                    ]);
+                    if ($loginWasSuccessful) {
+                        $this->sendEmail();
+                    } else {
+                        return redirect('/login');
+                    }
+
+                    return redirect('/verify');
                 } else {
                     return redirect('/register')
                         ->withInput()
@@ -55,40 +68,70 @@ class RegisterController extends Controller
         }
     }
 
-    public function verify($user) {
+    public function verify() {
+
+        $user = Auth::user();  // object must exist because of middleware
+
         // determine whether to serve the view or post the login form
         if ($request->isMethod('post')) {
-            return verifyEmailRequest($user); // return the redirect request
+            $this->sendEmail();
         } else {
             // if you are doing a get you must have a token
-            if ($token === "") {
-                return redirect('/login'))
+            if ($user->verified === "success") {
+                return redirect('/login');
             }
-            return view('verify', [
-                    'token' => $token,
-                    'email' =>
-                ]);
+        }
+
+        // user is not verified, display verfified page
+        return view('verify', [
+            'user' => $user,
+        ]);
+    }
+
+    public function activate(Request $request) {
+        try {
+            $token = $request->token;
+            $userId = DB::table('verify_email_requests')
+                    ->select('user_id')
+                    ->where('token', '=', Hash::make($token))
+                    ->first();
+            // hash was found, now verify user
+            $user = User::find($userId);
+            $user->verified = 'true';
+            $user->save();
+
+            if (Auth::check()) {
+                // The user is logged in, log him out to reinitate session
+                Auth::logout();
+            }
+            return view('successfully_verified');
+        } catch (QueryException $e) {
+            dd(e);
+            return redirect('/login')
+                ->withErrors("There was an error processing your request");
         }
     }
 
-    private function sendEmail($user) {
+    private function sendEmail() {
 
+        $user = Auth::user();
         $token = str_random(10); // produce a token of 10 chars
         $verifyEmailRequest = new VerifyEmailRequest;
         $verifyEmailRequest->token = Hash::make($token);  // store a hashed token
-        $verifyEmailRequest->userId = $user->id;
-        $timeNow = Carbon\Carbon::now();  // get the time
+        $verifyEmailRequest->user_id = $user->id;
+        $timeNow = Carbon::now();  // get the time
         $verifyEmailRequest->created = $timeNow;
         $verifyEmailRequest->save();
 
-        $data = array('name'=>"Virat Gandhi");
+        $url = "http://localhost:8000/activate?token=".$token;
 
-        Mail::send('mail', $data, function($message) {
-         $message->to($user->email, 'Tutorials Point')->subject
-            ('Verify your email with Data Rhino:');
-         $message->from('data.rhino@israelfl.com','Data Rhino');
+        $data = array( 'email' => $user->email, 'name' => $user->name, 'url' => $url);
+
+        Mail::send('verify_email', $data, function($message) use ($data) {
+            $message
+                ->to($data['email'])
+                ->subject('Verify your email with Data Rhino:')
+                ->from('data.rhino@gmail.com','Data Rhino');
         });
-
-        return $token;
    }
 }

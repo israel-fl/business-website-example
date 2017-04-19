@@ -1,8 +1,14 @@
 @extends('base')
-@section('head')
+
+@section('title', 'Home')
+
+@section('styles')
+  @parent
+  <!-- Theme style -->
   {{ HTML::style('css/index.css') }}
-  {{ HTML::script('js/index.js') }}
 @endsection
+
+
 @section('body')
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -253,9 +259,9 @@ Providing data science services to startups and enterprise clients we noticed th
   <div class="row">
     <div class="col-sm-5">
       <p>Contact us and we'll get back to you within 24 hours.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Los Angeles, CA</p>
       <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> data.rhino@israelfl.com</p>
     </div>
     <div class="col-sm-7 slideanim">
       <div class="row">
@@ -296,4 +302,10 @@ Providing data science services to startups and enterprise clients we noticed th
 @endsection
 
 </body>
+@endsection
+
+@section('scripts')
+@parent
+  {{ HTML::script('js/index.js') }}
+
 @endsection
