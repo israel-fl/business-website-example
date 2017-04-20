@@ -10,3 +10,5 @@ Homestead.yaml
 .env
 raw
 bower_components
+access.log
+error.log
