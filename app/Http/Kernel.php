@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         'verified.required' => [
             \App\Http\Middleware\RedirectIfNotLoggedIn::class,
             \App\Http\Middleware\RedirectIfNotVerified::class,
-        ]
+        ],
 
         'api' => [
             'throttle:60,1',
