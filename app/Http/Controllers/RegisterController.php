@@ -134,7 +134,7 @@ class RegisterController extends Controller
         $verifyEmailRequest->created = $timeNow;
         $verifyEmailRequest->save();
 
-        $url = "http://localhost:8000/activate?token=".$token;
+        $url = "https://www.datarhino.ml/activate?token=".$token;
 
         $data = array( 'email' => $user->email, 'name' => $user->name, 'url' => $url);
 

@@ -5,7 +5,7 @@
 @section('styles')
   @parent
   <!-- Theme style -->
-  {{ HTML::style('css/index.css') }}
+  {{ HTML::style('public/css/index.css') }}
 @endsection
 
 

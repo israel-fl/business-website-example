@@ -89,7 +89,7 @@ class ResetPasswordController extends Controller
         $resetPasswordRequest->created_at = $timeNow;
         $resetPasswordRequest->save();
 
-        $url = "http://localhost:8000/reset/verify?token=".$token;
+        $url = "https://www.datarhino.ml/reset/verify?token=".$token;
 
         $data = array( 'email' => $user->email, 'name' => $user->name, 'url' => $url);
 
