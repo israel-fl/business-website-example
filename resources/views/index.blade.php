@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#myPage">
-        {{ HTML::image('img/logo1.png') }}
+        {{ HTML::image('public/img/logo1.png') }}
         </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -126,21 +126,21 @@ Providing data science services to startups and enterprise clients we noticed th
   <div class="row text-center slideanim">
     <div class="col-sm-4">
       <div class="thumbnail">
-        {{ HTML::image('img/paris.jpg', 'paris', array('class' => 'img-portfolio')) }}
+        {{ HTML::image('public/img/paris.jpg', 'paris', array('class' => 'img-portfolio')) }}
         <p><strong>Paris</strong></p>
         <p>Yes, we built Paris</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        {{ HTML::image('img/newyork.jpg', 'newyork', array('class' => 'img-portfolio')) }}
+        {{ HTML::image('public/img/newyork.jpg', 'newyork', array('class' => 'img-portfolio')) }}
         <p><strong>New York</strong></p>
         <p>We built New York</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="thumbnail">
-        {{ HTML::image('img/sanfran.jpg', 'sanfran', array('class' => 'img-portfolio')) }}
+        {{ HTML::image('public/img/sanfran.jpg', 'sanfran', array('class' => 'img-portfolio')) }}
         <p><strong>San Francisco</strong></p>
         <p>Yes, San Fran is ours</p>
       </div>
