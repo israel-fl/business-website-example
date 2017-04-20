@@ -36,6 +36,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'verified.required' => [
+            \App\Http\Middleware\RedirectIfNotLoggedIn::class,
+            \App\Http\Middleware\RedirectIfNotVerified::class,
+        ]
+
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -58,6 +63,5 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'login.required' => \App\Http\Middleware\RedirectIfNotLoggedIn::class,
-        'verified.required' => \App\Http\Middleware\RedirectIfNotVerified::class,
     ];
 }
