@@ -1,0 +1,45 @@
+server {
+
+    listen 80;
+
+    server_name datarhino.ml;
+
+    root /var/www/DataRhino/public;
+    index index.php index.html index.htm;
+
+    access_log /var/www/DataRhino/access.log;
+    error_log /var/www/DataRhino/error.log;
+
+    if ($host = "datarhino.ml") {
+        return 301 https://www.$host$request_uri;
+    }
+
+    return 301 https://$host$request_uri;
+
+}
+
+server {
+    ssl on;
+    listen 443 ssl;
+
+    server_name datarhino.ml;
+    root /var/www/DataRhino/public;
+    index index.php index.html index.htm;
+
+    ssl_certificate /etc/nginx/ssl/datarhino.crt;
+    ssl_certificate_key /etc/nginx/ssl/datarhino.key;
+
+    location / {
+        try_files $uri /index.php =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location /public {
+        alias /var/www/DataRhino/public;
+    }
+
+}
