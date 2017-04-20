@@ -272,7 +272,7 @@
           <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td class="email-masthead">
-                <img src="" alt="logo" height="42" width="42">
+                <img src="https://datarhino.ml/public/img/logo.png" alt="logo" height="42" width="42">
               </td>
             </tr>
             <!-- Email Body -->

@@ -3,7 +3,7 @@
 @section('styles')
   @parent
   <!-- Theme style -->
-  {{ HTML::style('bower_components/adminlte/dist/css/AdminLTE.min.css') }}
+  {{ HTML::style('public/bower_components/adminlte/dist/css/AdminLTE.min.css') }}
 @endsection
 
 @section('body')

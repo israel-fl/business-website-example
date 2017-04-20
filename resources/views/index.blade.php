@@ -301,6 +301,6 @@ Providing data science services to startups and enterprise clients we noticed th
 
 @section('scripts')
 @parent
-  {{ HTML::script('js/index.js') }}
+  {{ HTML::script('public/js/index.js') }}
 
 @endsection

@@ -5,8 +5,8 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  {{ HTML::style('bower_components/adminlte/dist/css/AdminLTE.min.css') }}
-  {{ HTML::style('css/login.css') }}
+  {{ HTML::style('public/bower_components/adminlte/dist/css/AdminLTE.min.css') }}
+  {{ HTML::style('public/css/login.css') }}
 @endsection
 
 @section('body')
@@ -60,5 +60,5 @@
 
 @section('scripts')
 @parent
-{{ HTML::script('js/login.js') }}
+{{ HTML::script('public/js/login.js') }}
 @endsection

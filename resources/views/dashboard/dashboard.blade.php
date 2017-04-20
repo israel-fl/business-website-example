@@ -5,8 +5,8 @@
 @section('styles')
   @parent
   <!-- Theme style -->
-  {{ HTML::style('bower_components/material-dashboard/assets/css/material-dashboard.css') }}
-  {{ HTML::style('css/login.css') }}
+  {{ HTML::style('public/bower_components/material-dashboard/assets/css/material-dashboard.css') }}
+  {{ HTML::style('public/css/login.css') }}
 @endsection
 
 @section('body')
@@ -563,15 +563,15 @@
 
 @section('scripts')
 @parent
-    {{ HTML::script('bower_components/material-dashboard/assets/js/material.min.js') }}
+    {{ HTML::script('public/bower_components/material-dashboard/assets/js/material.min.js') }}
 
     <!--  Charts Plugin -->
-    {{ HTML::script('bower_components/material-dashboard/assets/js/chartist.min.js') }}
+    {{ HTML::script('public/bower_components/material-dashboard/assets/js/chartist.min.js') }}
 
     <!--  Notifications Plugin    -->
-    {{ HTML::script('bower_components/material-dashboard/assets/js/bootstrap-notify.js') }}
+    {{ HTML::script('public/bower_components/material-dashboard/assets/js/bootstrap-notify.js') }}
 
     <!-- Material Dashboard javascript methods -->
-    {{ HTML::script('bower_components/material-dashboard/assets/js/material-dashboard.js') }}
+    {{ HTML::script('public/bower_components/material-dashboard/assets/js/material-dashboard.js') }}
 
 @endsection

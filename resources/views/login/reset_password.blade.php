@@ -3,8 +3,8 @@
 @section('styles')
   @parent
   <!-- Theme style -->
-  {{ HTML::style('bower_components/adminlte/dist/css/AdminLTE.min.css') }}
-  {{ HTML::style('css/register.css') }}
+  {{ HTML::style('public/bower_components/adminlte/dist/css/AdminLTE.min.css') }}
+  {{ HTML::style('public/css/register.css') }}
 @endsection
 
 @section('body')
