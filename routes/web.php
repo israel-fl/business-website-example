@@ -17,19 +17,25 @@ Route::get('/', function () {
 
 Route::get('/login', 'LoginController@login');
 Route::post('/login', 'LoginController@login');
-Route::get('/logout', 'LoginController@logout')->middleware('auth');;
+Route::get('/logout', 'LoginController@logout')->middleware('login.required');;
 
 Route::get('/register', 'RegisterController@register');
 Route::post('/register', 'RegisterController@register');
-Route::get('/verify', 'RegisterController@verify')->middleware('auth');;
+Route::get('/verify', 'RegisterController@verify')->middleware('login.required');
+Route::post('/verify', 'RegisterController@verify')->middleware('login.required');
 Route::get('/activate', 'RegisterController@activate');
+Route::get('/policy', "RegisterController@showPolicy");
+Route::get('/terms', "RegisterController@showTerms");
 
-Route::get('/dashboard', 'DashboardController@showDashboard')->middleware('auth');;
-Route::get('/dashboard/profile', 'DashboardController@profile')->middleware('auth');;
-Route::get('/dashboard/tables', 'DashboardController@tables')->middleware('auth');;
-Route::get('/dashboard/notifications', 'DashboardController@notifications')->middleware('auth');;
-Route::get('/dashboard/create', 'DashboardController@createUser')->middleware('auth');;
-Route::post('/dashboard/create', 'DashboardController@createUser')->middleware('auth');;
-Route::get('/user', function() {
-    dd(Auth::user());
-});
+Route::get('/dashboard', 'DashboardController@showDashboard')->middleware('verified.required');
+Route::get('/dashboard/profile', 'DashboardController@profile')->middleware('verified.required');
+Route::get('/dashboard/tables', 'DashboardController@tables')->middleware('verified.required');
+Route::get('/dashboard/notifications', 'DashboardController@notifications')->middleware('verified.required');
+Route::get('/dashboard/create', 'DashboardController@createUser')->middleware('verified.required');
+Route::post('/dashboard/create', 'DashboardController@createUser')->middleware('verified.required');
+
+
+Route::get('/reset', 'ResetPasswordController@beginReset');
+Route::post('/reset', 'ResetPasswordController@beginReset');
+Route::get('/reset/verify', 'ResetPasswordController@resetPassword');
+Route::post('/reset/verify', 'ResetPasswordController@resetPassword');

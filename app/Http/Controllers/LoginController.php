@@ -41,7 +41,7 @@ class LoginController extends Controller {
             }
 
         } else {  // this is just a GET request, show the page
-            return view('login');
+            return view('login.login');
         }
     }
 

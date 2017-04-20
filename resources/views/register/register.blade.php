@@ -13,7 +13,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Data</b>Rhino</a>
+    <a href="/"><b>Data</b>Rhino</a>
   </div>
 
   <div class="register-box-body">
@@ -37,7 +37,7 @@
           <button type="submit" class="btn-block btn-full-width mui-btn mui-btn--raised mui-btn--primary">Register</button>
         </div>
     </form>
-    <p>By creating an account you agree to Data Rhino's <a href="">Conditions of Use</a> and <a href="/policy">Privacy Notice</a></p>
+    <p>By creating an account you agree to Data Rhino's <a href="/terms">Conditions of Use</a> and <a href="/policy">Privacy Notice</a></p>
     </form>
     <hr></hr>
     Already have an account? <a href="/login" class="text-center">Sign in</a>

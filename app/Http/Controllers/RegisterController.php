@@ -12,6 +12,7 @@ use Redirect;
 use Auth;
 use Illuminate\Database\QueryException;
 use Mail;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -64,28 +65,26 @@ class RegisterController extends Controller
                         ->withErrors("There was an error processing your request");
             }
         } else {  // this is just a GET request, show the page
-            return view('register');
+            return view('register.register');
         }
     }
 
-    public function verify() {
-
-        $user = Auth::user();  // object must exist because of middleware
+    public function verify(Request $request) {
 
         // determine whether to serve the view or post the login form
         if ($request->isMethod('post')) {
             $this->sendEmail();
+            return redirect('/verify')
+                ->with('successStatus', 'Email resent');
         } else {
-            // if you are doing a get you must have a token
-            if ($user->verified === "success") {
-                return redirect('/login');
-            }
+            $user = Auth::user();  // object must exist because of middleware
+            // user is not verified, display verfified page
+            return view('register.verify', [
+                'user' => $user,
+            ]);
         }
 
-        // user is not verified, display verfified page
-        return view('verify', [
-            'user' => $user,
-        ]);
+
     }
 
     public function activate(Request $request) {
@@ -93,8 +92,9 @@ class RegisterController extends Controller
             $token = $request->token;
             $userId = DB::table('verify_email_requests')
                     ->select('user_id')
-                    ->where('token', '=', Hash::make($token))
+                    ->where('token', '=', hash('sha256', $token))
                     ->first();
+            $userId = $userId->user_id;
             // hash was found, now verify user
             $user = User::find($userId);
             $user->verified = 'true';
@@ -104,7 +104,7 @@ class RegisterController extends Controller
                 // The user is logged in, log him out to reinitate session
                 Auth::logout();
             }
-            return view('successfully_verified');
+            return view('register.successfully_verified');
         } catch (QueryException $e) {
             dd(e);
             return redirect('/login')
@@ -112,12 +112,23 @@ class RegisterController extends Controller
         }
     }
 
+
+    public function showPolicy() {
+        return view('policies.policy');
+    }
+
+
+    public function showTerms() {
+        return view('policies.terms');
+    }
+
+
     private function sendEmail() {
 
         $user = Auth::user();
         $token = str_random(10); // produce a token of 10 chars
         $verifyEmailRequest = new VerifyEmailRequest;
-        $verifyEmailRequest->token = Hash::make($token);  // store a hashed token
+        $verifyEmailRequest->token = hash('sha256', $token);  // encrypt the token, since Hashes are salted
         $verifyEmailRequest->user_id = $user->id;
         $timeNow = Carbon::now();  // get the time
         $verifyEmailRequest->created = $timeNow;
@@ -127,7 +138,7 @@ class RegisterController extends Controller
 
         $data = array( 'email' => $user->email, 'name' => $user->name, 'url' => $url);
 
-        Mail::send('verify_email', $data, function($message) use ($data) {
+        Mail::send('register.verify_email', $data, function($message) use ($data) {
             $message
                 ->to($data['email'])
                 ->subject('Verify your email with Data Rhino:')

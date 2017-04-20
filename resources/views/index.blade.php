@@ -31,6 +31,8 @@
         <li><a href="#portfolio">PORTFOLIO</a></li>
         <li><a href="#pricing">PRICING</a></li>
         <li><a href="#contact">CONTACT</a></li>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/register">REGISTER</a></li>
       </ul>
     </div>
   </div>
@@ -39,14 +41,7 @@
 <div class="jumbotron text-center">
   <h1>Data Rhino</h1>
   <p>We bring the power of data science and artificial intelligence to our customers</p>
-  <form class="form-inline">
-    <div class="input-group">
-      <input type="email" class="form-control" size="50" placeholder="Email Address" required>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-danger">Subscribe</button>
-      </div>
-    </div>
-  </form>
+
 </div>
 
 <!-- Container (About Section) -->

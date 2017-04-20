@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
-class CheckAdmin
+class RedirectIfNotVerified
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,13 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
+        // user must be logged in because of previous middleware
         $user = Auth::user();
-        $level = $user->level;
-        if ($level == 2) {
+        if ($user->verified === "true") {
             return $next($request);
-        } else {  // user not authorized to see endpoint
-            return view('unauth');
+        } else {
+            // user is not verified, display verfified page
+            return redirect('/verify');
         }
     }
 }

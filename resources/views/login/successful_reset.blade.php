@@ -11,12 +11,11 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Data</b>Rhino</a>
+    <a href="/"><b>Data</b>Rhino</a>
   </div>
 
   <div class="register-box-body">
-    <h3 class="login-box-msg">Thank you for verifying your account</h3>
-    Go <a href="/dashboard">home</a>
+    <h3 class="login-box-msg">Your password has been reset</h3>
   </div>
   <!-- /.form-box -->
 </div>

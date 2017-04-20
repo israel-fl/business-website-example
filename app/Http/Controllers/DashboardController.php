@@ -19,13 +19,9 @@ class DashboardController extends Controller
 
     public function profile() {
         $user = Auth::user();
-        if ($user->level == 2) {
-            return view('dashboard.user', [
+        return view('dashboard.user', [
                     'user' => $user
                 ]);
-        } else {
-            return redirect('/dashboard');
-        }
     }
 
     public function tables() {
@@ -78,9 +74,13 @@ class DashboardController extends Controller
                     ->withErrors("There was an error processing your request");
             }
         } else {  // this was a get request
-            return view('dashboard.create_user', [
-                    'user' => $user,
-                ]);
+            if ($user->level == 2) {
+                return view('dashboard.create_user', [
+                        'user' => $user,
+                    ]);
+            } else {
+                return redirect('/dashboard');
+            }
         }
     }
 }

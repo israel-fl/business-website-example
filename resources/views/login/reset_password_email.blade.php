@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Verify your account with Data Rhino</title>
+    <title>Data Rhino | Reset your password</title>
     <!--
     The style block is collapsed on page load to save you some scrolling.
     Postmark automatically inlines all CSS properties for maximum email client
@@ -273,7 +273,7 @@
           <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td class="email-masthead">
-                <img src="">
+                <img src="" alt="logo" height="42" width="42">
               </td>
             </tr>
             <!-- Email Body -->
@@ -285,7 +285,7 @@
                     <td class="content-cell">
                       <!-- Username here!! -->
                       <h1>Hi, {!! $name !!}</h1>
-                      <p>Thank you for creating an account with Data Rhino. Please click the following button to verify your email.</p>
+                      <p>Please click the following to reset your password.</p>
                       <!-- Action -->
                       <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
@@ -298,7 +298,7 @@
                                   <table border="0" cellspacing="0" cellpadding="0">
                                     <tr>
                                       <td>
-                                        <a href="{{!! $url !!}}" class="button" target="_blank">Confirm email</a>
+                                        <a href="{!! $url !!}" class="button" target="_blank">Reset Password</a>
                                       </td>
                                     </tr>
                                   </table>
@@ -308,7 +308,7 @@
                           </td>
                         </tr>
                       </table>
-                      <p>If you did not create this account, please ignore this email or contact support at <a href="data.rhino@israelfl.com">data.rhino@deliverysky.com</a> if you have questions.</p>
+                      <p>If you did make this request please ignore this email or contact support at <a href="data.rhino@israelfl.com">data.rhino@gmail.com</a> if you have questions.</p>
                       <p>Thanks,
                         <br>The Data Rhino Team</p>
                       <!-- Sub copy -->
@@ -316,7 +316,7 @@
                         <tr>
                           <td>
                             <p class="sub">If you’re having trouble with the button above, copy and paste the URL below into your web browser.</p>
-                            <p class="sub"></p>
+                            <a href="{!! $url !!}" class="sub">{!! $url !!}</a>
                           </td>
                         </tr>
                       </table>
@@ -345,5 +345,3 @@
     </table>
   </body>
 </html>
-0
-0
