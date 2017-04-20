@@ -7,8 +7,9 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 
-class DashboardController extends Controller
-{
+class DashboardController extends Controller {
+
+
     public function showDashboard() {
         // get user here and and send it over
         $user = Auth::user();
@@ -17,12 +18,14 @@ class DashboardController extends Controller
             ]);
     }
 
+
     public function profile() {
         $user = Auth::user();
         return view('dashboard.user', [
                     'user' => $user
                 ]);
     }
+
 
     public function tables() {
         $user = Auth::user();
@@ -55,15 +58,18 @@ class DashboardController extends Controller
                 $pass = request('pass');
                 // dd($email, $name, $pass);
                 // check if the email is already in the database
-                $exists = User::find($email);
-                if ($exists === NULL) {
-                    $user = new User;
-                    $user->name = $name;
-                    $user->email = $email;
-                    $user->password =  Hash::make($pass);  // we're storing hashes of the passwords
-                    $user->level = 2;  // this endpoint creates admins
-                    $user->save();
+                $user = User::firstOrNew([
+                        'email' => $email
+                    ]);
+                if ($user->exists) {
+                    return redirect('/dashboard/create')
+                        ->withErrors("There is already an account associated with that email");
                 }
+                $user->name = $name;
+                $user->email = $email;
+                $user->password =  Hash::make($pass);  // we're storing hashes of the passwords
+                $user->level = 2;  // this endpoint creates admins
+                $user->save();
                 return redirect('/dashboard/create')
                     ->with('successStatus', 'Admin created successfully');
             } catch (QueryException $e) {

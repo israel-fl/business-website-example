@@ -32,30 +32,32 @@ class RegisterController extends Controller
                 $pass = request('pass');
                 // dd($email, $name, $pass);
                 // check if the email is already in the database
-                $exists = User::find($email);
-                if ($exists === NULL) {
-                    $user = new User;
-                    $user->name = $name;
-                    $user->email = $email;
-                    $user->password =  Hash::make($pass);  // we're storing hashes of the passwords
-                    $user->level = 1;  // every new user is level 1, admins are assigned in registerAdmin
-                    $user->save();
-
-                    $loginWasSuccessful = Auth::attempt([
-                        'email' => $email,
-                        'password' => $pass // we're comparing hashes
+                $user = User::firstOrNew([
+                        'email' => $email
                     ]);
-                    if ($loginWasSuccessful) {
-                        $this->sendEmail();
-                    } else {
-                        return redirect('/login');
-                    }
 
+                if ($user->exists) {
+                    return redirect('/register')
+                        ->withInput()
+                        ->withErrors("There is already an account associated with that email");
+                }
+
+                $user->name = $name;
+                $user->email = $email;
+                $user->password =  Hash::make($pass);  // we're storing hashes of the passwords
+                $user->level = 1;  // every new user is level 1, admins are assigned in registerAdmin
+                $user->save();
+
+                $loginWasSuccessful = Auth::attempt([
+                    'email' => $email,
+                    'password' => $pass // we're comparing hashes
+                ]);
+                if ($loginWasSuccessful) {
+                    $this->sendEmail();
                     return redirect('/verify');
                 } else {
                     return redirect('/register')
-                        ->withInput()
-                        ->withErrors("There is already an account associated with that email.");
+                        ->withErrors("There was an error processing your request");
                 }
             } catch (QueryException $e) {
                     dd($e);
