@@ -96,6 +96,9 @@ class RegisterController extends Controller
                     ->select('user_id')
                     ->where('token', '=', hash('sha256', $token))
                     ->first();
+            if (empty((array)$userId)) { // check if the token exists
+                abort(404, 'Unauthorized action');
+            }
             $userId = $userId->user_id;
             // hash was found, now verify user
             $user = User::find($userId);
