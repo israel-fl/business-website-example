@@ -11,6 +11,15 @@
 
 @section('body')
 <body class="hold-transition register-page">
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="register-box">
   <div class="register-logo">
     <a href="/"><b>Data</b>Rhino</a>
@@ -44,15 +53,6 @@
   </div>
   <!-- /.form-box -->
 </div>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 <!-- /.register-box -->
 </body>
 @endsection
