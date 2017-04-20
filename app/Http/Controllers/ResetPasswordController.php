@@ -64,6 +64,9 @@ class ResetPasswordController extends Controller
                             ->select('email')
                             ->where('token', '=', hash('sha256', $token))
                             ->first();
+                    if (empty((array)$email)) { // check if the token exists
+                        abort(404, 'Unauthorized action');
+                    }
                     $email = $email->email;
                     // hash was found, now reset password
                     $user = User::where('email', $email)->first();
